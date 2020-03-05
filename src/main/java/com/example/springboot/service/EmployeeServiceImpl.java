@@ -1,5 +1,6 @@
 package com.example.springboot.service;
 
+import com.example.springboot.model.Contact;
 import com.example.springboot.model.Employee;
 import com.example.springboot.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @Override
     public void addEmployee(Employee employee){
+        Contact contact = employee.getContact();
+        contact.setEmployee(employee);
         employeeRepository.save(employee);
     }
 }

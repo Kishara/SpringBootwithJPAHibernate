@@ -1,17 +1,17 @@
 package com.example.springboot.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Employee {
     @Id
     @GeneratedValue
-    Integer id;
-    String name;
-    String department;
+    private Integer id;
+    private String name;
+    private String department;
+
+    @OneToOne (cascade = CascadeType.ALL, mappedBy = "employee")
+    private Contact contact;
 
     public Integer getId() {
         return id;
@@ -37,12 +37,21 @@ public class Employee {
         this.department = department;
     }
 
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", department='" + department + '\'' +
+                ", contact=" + contact +
                 '}';
     }
 }
