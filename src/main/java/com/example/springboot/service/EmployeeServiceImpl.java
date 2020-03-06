@@ -24,12 +24,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @Override
     public void addEmployee(Employee employee){
+        //If you remove Employee reference in COntact class,( Do unidirectional) you can also remove below two lines.
         Contact contact = employee.getContact();
         contact.setEmployee(employee);
-
-        for(Vehicle vehicle: employee.getVehicleList()){
-            vehicle.setEmployee(employee);
-        }
+//
+//        for(Vehicle vehicle: employee.getVehicleList()){
+//            vehicle.setEmployee(employee);
+//        }
         employeeRepository.save(employee);
     }
 }

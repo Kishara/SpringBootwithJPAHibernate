@@ -15,8 +15,14 @@ public class Employee {
     @OneToOne (cascade = CascadeType.ALL, mappedBy = "employee")
     private Contact contact;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+//    private List<Vehicle> vehicleList;
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private List<Vehicle> vehicleList;
+
 
     public Integer getId() {
         return id;
@@ -57,6 +63,7 @@ public class Employee {
     public void setVehicleList(List<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
     }
+
 
     @Override
     public String toString() {

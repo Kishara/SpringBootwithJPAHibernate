@@ -12,10 +12,10 @@ public class Vehicle {
     private Integer vehicleId;
     private String brandCompany;
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    @JsonIgnore
-    private Employee employee;
+//    @ManyToOne
+//    @JoinColumn(name = "id", referencedColumnName = "id")
+//    @JsonIgnore
+//    private Employee employee;
 
     public Integer getVehicleId() {
         return vehicleId;
@@ -33,11 +33,5 @@ public class Vehicle {
         this.brandCompany = brandCompany;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }
