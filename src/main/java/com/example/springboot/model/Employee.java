@@ -1,5 +1,7 @@
 package com.example.springboot.model;
 
+import org.hibernate.annotations.JoinColumnOrFormula;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,13 +17,22 @@ public class Employee {
     @OneToOne (cascade = CascadeType.ALL, mappedBy = "employee")
     private Contact contact;
 
+    //Bidirectional
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
 //    private List<Vehicle> vehicleList;
 
 
+    //Unidirectional
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", referencedColumnName = "id")
     private List<Vehicle> vehicleList;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "employee_product_list",
+            joinColumns = @JoinColumn(name = "Eid", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "Pid", referencedColumnName = "productId"))
+    private List<Product> productList;
 
 
     public Integer getId() {
@@ -64,6 +75,13 @@ public class Employee {
         this.vehicleList = vehicleList;
     }
 
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
 
     @Override
     public String toString() {
@@ -73,6 +91,7 @@ public class Employee {
                 ", department='" + department + '\'' +
                 ", contact=" + contact +
                 ", vehicleList=" + vehicleList +
+                ", productList=" + productList +
                 '}';
     }
 }
