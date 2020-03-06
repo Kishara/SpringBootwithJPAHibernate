@@ -1,9 +1,11 @@
 package com.example.springboot.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -12,6 +14,9 @@ public class Employee {
 
     @OneToOne (cascade = CascadeType.ALL, mappedBy = "employee")
     private Contact contact;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    private List<Vehicle> vehicleList;
 
     public Integer getId() {
         return id;
@@ -45,6 +50,14 @@ public class Employee {
         this.contact = contact;
     }
 
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
+
+    public void setVehicleList(List<Vehicle> vehicleList) {
+        this.vehicleList = vehicleList;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -52,6 +65,7 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", department='" + department + '\'' +
                 ", contact=" + contact +
+                ", vehicleList=" + vehicleList +
                 '}';
     }
 }
